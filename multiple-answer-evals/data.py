@@ -33,4 +33,10 @@ for row in df.index:
 
 new_df = pd.DataFrame(newData)
 
+# split the choices
+split_choices = lambda x: pd.Series(x.strip("[]").replace("'", "").split(', '))
+
+new_df[['A', 'B', 'C', 'D','E','F','G','H','I']] = new_df['choices'].apply(split_choices)
+new_df['answer'] = new_df['answer'].replace({0:'A', 1:'B', 2:'C', 3:'D', 4:'E', 5:'F', 6:'G', 7:'H', 8:'I'})
+
 new_df.to_csv("data.csv")
